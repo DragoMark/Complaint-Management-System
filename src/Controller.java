@@ -47,6 +47,7 @@ public class Controller{
 	}
 
 	public String giveSolution(int complaintNo){
+		System.out.println(complaintNo);
 		return cFile.getSoln(complaintNo);
 	}	
 	// @Override
