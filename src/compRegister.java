@@ -14,18 +14,20 @@ import javax.swing.JTextArea;
 
 public class compRegister implements ActionListener {
 	private JDialog win;
-	private compFile cfile;
+	// private compFile cfile;
 	private JPanel panel1, panel2, panel3;
 	private Choice dept;
 	private String[] depts = { "Dept1", "Dept2", "Dept3", "Dept4", "Dept5" };
-	private JTextArea taComp;
+	private JTextArea complaint;
 	private JButton submitBtn, cancelBtn;
-	private int cno;
+	private int complaintNo;
+	private Controller controller;
 
 	public compRegister(compFile cfile) {
 		win = new JDialog();
-		this.cfile = cfile;
-		cno = cfile.totalComps + 1;
+		// this.cfile = cfile;
+		complaintNo = cfile.totalComps + 1;
+		controller = new Controller();
 
 		win.setModalityType(ModalityType.APPLICATION_MODAL);
 		win.setTitle("Register Complaint");
@@ -43,11 +45,11 @@ public class compRegister implements ActionListener {
 
 		panel2 = new JPanel();
 		panel2.add(new JLabel("Complain no. "));
-		panel2.add(new JLabel(cno + ""));
+		panel2.add(new JLabel(complaintNo + ""));
 		win.add(panel2);
 
-		taComp = new JTextArea(20, 40);
-		win.add(new JScrollPane(taComp));
+		complaint = new JTextArea(20, 40);
+		win.add(new JScrollPane(complaint));
 
 		panel3 = new JPanel();
 		submitBtn = new JButton("Submit");
@@ -66,9 +68,10 @@ public class compRegister implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JButton bPressed = (JButton) e.getSource();
 		if (bPressed.equals(submitBtn)) {
-			Complaint newComp = new Complaint(dept.getSelectedItem(), cno, taComp.getText(), "");
-			cfile.addComp(newComp);
-			JOptionPane.showMessageDialog(null, "Compaint has been Registered.\nYour Complaint No. is " + cno);
+			Complaint newComp = new Complaint(dept.getSelectedItem(), complaintNo, complaint.getText(), "");
+			controller.acceptRegister(newComp);
+			// cfile.addComp(newComp);
+			JOptionPane.showMessageDialog(null, "Compaint has been Registered.\nYour Complaint No. is " + complaintNo);
 			win.dispose();
 		} else if (bPressed.equals(cancelBtn)) {
 			int cancel = JOptionPane.showConfirmDialog(null, "Cancel Complaint Registration ?");

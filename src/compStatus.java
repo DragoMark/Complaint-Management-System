@@ -16,6 +16,7 @@ public class compStatus implements ActionListener {
 	private int compNum;
 	private JTextField tfCompNum;
 	private JTextArea taStatus;
+	private Controller controller;
 
 	public compStatus(compFile cfile) {
 		win = new JDialog();
@@ -49,7 +50,7 @@ public class compStatus implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		try {
 			this.compNum = Integer.parseInt(tfCompNum.getText());
-			String status = cfile.getSoln(compNum);
+			String status = controller.giveSolution(compNum);
 			if (status == null) {
 				status = "Invalid Complaint No.";
 			} else if (status.isEmpty()) {

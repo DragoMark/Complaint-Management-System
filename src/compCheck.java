@@ -15,20 +15,21 @@ import javax.swing.JTextField;
 
 public class compCheck implements ActionListener {
 	private JDialog win;
-	private compFile cfile;
+	// private compFile cfile;
 	private JTextArea taSoln;
 	private JTextField tfCompNum;
 	private JButton submitBtn;
+	private Controller controller;
 
-	public compCheck(compFile cfile) {
-		this.cfile = cfile;
+	public compCheck() {
+		// this.cfile = cfile;
 		win = new JDialog();
 		win.setModalityType(ModalityType.APPLICATION_MODAL);
 		win.setTitle("Complaints Filed");
 		win.setSize(500, 500);
 		win.setLayout(new GridLayout(2, 1));
 
-		JTable tableAllComps = cfile.returnTable();
+		JTable tableAllComps = controller.returnData();
 		tableAllComps.setEnabled(false);
 
 		tfCompNum = new JTextField(40);
@@ -55,28 +56,28 @@ public class compCheck implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (submitBtn == (JButton) e.getSource()) {
 			boolean flag = true;
-			int cno = 0;
+			int complaintNo = 0;
 			String sol = taSoln.getText();
 			try {
-				cno = Integer.parseInt(tfCompNum.getText());
+				complaintNo = Integer.parseInt(tfCompNum.getText());
 			} catch (Exception exc) {
 				flag = false;
 				JOptionPane.showMessageDialog(null, "Invalid Complaint No");
 			}
 			if (flag) {
-				if (!cfile.findComp(cno)) {
+				if (!controller.findComplaint(complaintNo)) {
 					JOptionPane.showMessageDialog(null, "No Complaint exist for given Complain No.");
 				} else if (sol.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Solution cant be empty");
 				} else // Everything right
 				{
 					try {
-						cfile.addSoln(cno, sol);
+						controller.addSolution(complaintNo, sol);
 						JOptionPane.showMessageDialog(null, "Successfully Added");
 					} catch (Exception e1) {
 						int opt = JOptionPane.showConfirmDialog(null, "Solution Already Exists. Overwrite?");
 						if (opt == JOptionPane.YES_OPTION) {
-							cfile.overwriteSoln(cno, sol);
+							controller.updateSolution(complaintNo, sol);
 							JOptionPane.showMessageDialog(null, "Successfully Overwrited");
 						}
 					}

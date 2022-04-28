@@ -8,6 +8,7 @@ import javax.swing.JTable;
 public class compReport {
 	private JDialog win;
 	private JTable tableAllComps;
+	private Controller controller;
 
 	public compReport(compFile cfile) {
 		win = new JDialog();
