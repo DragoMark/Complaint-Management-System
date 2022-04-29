@@ -9,21 +9,13 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class View implements ActionListener, WindowListener{
-    // private JFrame win;
-	// private JButton menuBtns[];
-	// private final String password = "fuckroot@123";
 	private Controller controller;
-    // private compRegister Register;
-    // private compStatus Status;
-    // private compCheck Check;
-    // private compReport Report;
     private JFrame win;
-    private compFile cFile;
+    private Model cFile;
     private JButton menuBtns[];
     private final String password;
 
-public View(compFile cFile, String password, Controller controller){
-		// this.cFile = cFile;
+public View(Model cFile, String password, Controller controller){
 		this.password = password;
 		this.controller = controller;
 

@@ -12,7 +12,6 @@ import javax.swing.JTextField;
 
 public class compStatus implements ActionListener {
 	private JDialog win;
-	// private compFile cfile;
 	private int compNum;
 	private JTextField tfCompNum;
 	private JTextArea taStatus;
@@ -26,7 +25,6 @@ public class compStatus implements ActionListener {
 		win.setTitle("Complaint Status");
 		win.setSize(500, 300);
 		win.setLayout(new GridLayout(2, 1));
-		// this.cfile = cfile;
 
 		tfCompNum = new JTextField(20);
 		tfCompNum.addActionListener(this);

@@ -15,14 +15,12 @@ import javax.swing.JTextField;
 
 public class compCheck implements ActionListener {
 	private JDialog win;
-	// private compFile cfile;
 	private JTextArea SolutionText;
 	private JTextField complaintNoText;
 	private JButton submitBtn;
 	private Controller controller;
 
 	public compCheck(Controller controller) {
-		// this.cfile = cfile;
 		this.controller = controller;
 		win = new JDialog();
 		win.setModalityType(ModalityType.APPLICATION_MODAL);

@@ -1,12 +1,8 @@
-// import java.awt.event.WindowEvent;
-// import java.awt.event.WindowListener;
-// import javax.swing.JFrame;
-// import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 
 public class Controller{
-	private compFile cFile;
+	private Model cFile;
 	private final String password = "root";
 	private Controller controller;
 
@@ -14,7 +10,7 @@ public class Controller{
 
 	public Controller() {
 		String tmpPath = System.getProperty("java.io.tmpdir");
-        cFile = new compFile(tmpPath + "comps.txt");
+        cFile = new Model(tmpPath + "comps.txt");
 	}
 
 	public void boot(){
@@ -25,7 +21,6 @@ public class Controller{
 	public void acceptRegister(Complaint newComplaint){
 		cFile.addComp(newComplaint);
 		cFile.updateTotalComps();
-		// JOptionPane.showMessageDialog(null, newComplaint);
 	}
 
 	public int getCurrentComplaint(){
@@ -53,7 +48,6 @@ public class Controller{
 	}
 
 	public String giveSolution(int complaintNo){
-		// System.out.println(complaintNo);
 		return cFile.getSoln(complaintNo);
 	}
 
