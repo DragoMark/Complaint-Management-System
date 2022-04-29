@@ -14,7 +14,7 @@ import javax.swing.JTextArea;
 
 public class compRegister implements ActionListener {
 	private JDialog win;
-	// private compFile cfile;
+	private compFile cfile;
 	private JPanel panel1, panel2, panel3;
 	private Choice dept;
 	private String[] depts = { "Dept1", "Dept2", "Dept3", "Dept4", "Dept5" };
@@ -25,7 +25,7 @@ public class compRegister implements ActionListener {
 
 	public compRegister(compFile cfile) {
 		win = new JDialog();
-		// this.cfile = cfile;
+		this.cfile = cfile;
 		complaintNo = cfile.totalComps + 1;
 		controller = new Controller();
 
@@ -44,7 +44,7 @@ public class compRegister implements ActionListener {
 		win.add(panel1);
 
 		panel2 = new JPanel();
-		panel2.add(new JLabel("Complain no. "));
+		panel2.add(new JLabel("Complaint no. "));
 		panel2.add(new JLabel(complaintNo + ""));
 		win.add(panel2);
 
@@ -69,8 +69,9 @@ public class compRegister implements ActionListener {
 		JButton bPressed = (JButton) e.getSource();
 		if (bPressed.equals(submitBtn)) {
 			Complaint newComp = new Complaint(dept.getSelectedItem(), complaintNo, complaint.getText(), "");
-			controller.acceptRegister(newComp);
-			// cfile.addComp(newComp);
+			
+			// controller.acceptRegister(newComp);
+			cfile.addComp(newComp);
 			JOptionPane.showMessageDialog(null, "Compaint has been Registered.\nYour Complaint No. is " + complaintNo);
 			win.dispose();
 		} else if (bPressed.equals(cancelBtn)) {

@@ -4,6 +4,7 @@ import java.awt.Dialog.ModalityType;
 import javax.swing.JDialog;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JOptionPane;
 
 public class compReport {
 	private JDialog win;
@@ -18,6 +19,8 @@ public class compReport {
 		win.setLayout(new GridLayout(1, 1));
 
 		tableAllComps = cfile.returnTable();
+		// JOptionPane.showMessageDialog(null, cfile.returnTable());
+		// JOptionPane.showMessageDialog(null, controller.returnData());
 		tableAllComps.setEnabled(false);
 		win.add(new JScrollPane(tableAllComps));
 		win.setVisible(true);

@@ -19,17 +19,20 @@ public class View implements ActionListener, WindowListener{
     private JFrame win;
     private compFile cFile;
     private JButton menuBtns[];
-    private final String password = "fuckroot@123";
+    private final String password;
 
-    public View(compFile cFile){
-        win = new JFrame();
+    public View(compFile cFile, String password){
+		// this.win = win;
 		this.cFile = cFile;
-
+		this.password = password;
+		win = new JFrame();
+		// this.cFile = cFile;
+		
 		win.setTitle("Complaint Box");
 		win.setSize(500, 600);
 		win.addWindowListener(this);
 		win.setLayout(new GridLayout(5, 1));
-
+		
 		menuBtns = new JButton[5];
 		for (int i = 0; i < menuBtns.length; ++i) {
 			menuBtns[i] = new JButton();
@@ -65,6 +68,19 @@ public class View implements ActionListener, WindowListener{
 		}
 	}
     
+    public void compRegister(compFile cFile){
+        new compRegister(cFile);
+    }
+    public void compStatus(compFile cFile){
+        new compStatus(cFile);
+    }
+    public void compCheck(){
+        new compCheck();
+    }
+    public void compReport(compFile cFile){
+        new compReport(cFile);
+    }
+
 	@Override
 	public void windowClosing(WindowEvent e) {
         win.dispose();
@@ -75,20 +91,7 @@ public class View implements ActionListener, WindowListener{
         cFile.exit();
 	}
 
-    public void compRegister(compFile cFile){
-        Register = new compRegister(cFile);
-    }
-    public void compStatus(compFile cFile){
-        Status = new compStatus(cFile);
-    }
-    public void compCheck(){
-        Check = new compCheck();
-    }
-    public void compReport(compFile cFile){
-        Report = new compReport(cFile);
-    }
-
-    @Override
+	@Override
     public void windowOpened(WindowEvent e) {}
 
 	@Override
@@ -102,5 +105,6 @@ public class View implements ActionListener, WindowListener{
 
 	@Override
 	public void windowDeactivated(WindowEvent e) {}
+
 
 }
