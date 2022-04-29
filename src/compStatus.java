@@ -12,19 +12,21 @@ import javax.swing.JTextField;
 
 public class compStatus implements ActionListener {
 	private JDialog win;
-	private compFile cfile;
+	// private compFile cfile;
 	private int compNum;
 	private JTextField tfCompNum;
 	private JTextArea taStatus;
 	private Controller controller;
 
-	public compStatus(compFile cfile) {
+	public compStatus(Controller controller) {
+		this.controller = controller;
+
 		win = new JDialog();
 		win.setModalityType(ModalityType.APPLICATION_MODAL);
 		win.setTitle("Complaint Status");
 		win.setSize(500, 300);
 		win.setLayout(new GridLayout(2, 1));
-		this.cfile = cfile;
+		// this.cfile = cfile;
 
 		tfCompNum = new JTextField(20);
 		tfCompNum.addActionListener(this);
@@ -50,7 +52,7 @@ public class compStatus implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		try {
 			this.compNum = Integer.parseInt(tfCompNum.getText());
-			String status = cfile.getSoln(compNum);
+			String status = controller.giveSolution(compNum);
 			if (status == null) {
 				status = "Invalid Complaint No.";
 			} else if (status.isEmpty()) {

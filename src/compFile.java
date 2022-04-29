@@ -48,9 +48,11 @@ public class compFile {
 
 	public void addComp(Complaint comp) {
 		compList.add(comp);
-		this.totalComps++;
 	}
 
+	public void updateTotalComps(){
+		this.totalComps++;
+	}
 	public void addSoln(int cNo, String soln) throws Exception {
 		addSoln(cNo, soln, false);
 	}

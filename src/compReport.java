@@ -9,16 +9,16 @@ import javax.swing.JOptionPane;
 public class compReport {
 	private JDialog win;
 	private JTable tableAllComps;
-	private Controller controller;
+	// private Controller controller;
 
-	public compReport(compFile cfile) {
+	public compReport(Controller controller) {
 		win = new JDialog();
 		win.setModalityType(ModalityType.APPLICATION_MODAL);
 		win.setTitle("Complaints Filed");
 		win.setSize(500, 500);
 		win.setLayout(new GridLayout(1, 1));
 
-		tableAllComps = cfile.returnTable();
+		tableAllComps = controller.returnData();
 		// JOptionPane.showMessageDialog(null, cfile.returnTable());
 		// JOptionPane.showMessageDialog(null, controller.returnData());
 		tableAllComps.setEnabled(false);

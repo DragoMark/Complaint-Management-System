@@ -16,13 +16,14 @@ import javax.swing.JTextField;
 public class compCheck implements ActionListener {
 	private JDialog win;
 	// private compFile cfile;
-	private JTextArea taSoln;
-	private JTextField tfCompNum;
+	private JTextArea SolutionText;
+	private JTextField complaintNoText;
 	private JButton submitBtn;
 	private Controller controller;
 
-	public compCheck() {
+	public compCheck(Controller controller) {
 		// this.cfile = cfile;
+		this.controller = controller;
 		win = new JDialog();
 		win.setModalityType(ModalityType.APPLICATION_MODAL);
 		win.setTitle("Complaints Filed");
@@ -32,18 +33,18 @@ public class compCheck implements ActionListener {
 		JTable tableAllComps = controller.returnData();
 		tableAllComps.setEnabled(false);
 
-		tfCompNum = new JTextField(40);
+		complaintNoText = new JTextField(40);
 
-		taSoln = new JTextArea(7, 40);
+		SolutionText = new JTextArea(7, 40);
 
 		submitBtn = new JButton("Submit");
 		submitBtn.addActionListener(this);
 
 		JPanel panel = new JPanel();
 		panel.add(new JLabel("Complaint No. "));
-		panel.add(tfCompNum);
+		panel.add(complaintNoText);
 		panel.add(new JLabel("Solution "));
-		panel.add(new JScrollPane(taSoln));
+		panel.add(new JScrollPane(SolutionText));
 		panel.add(submitBtn);
 
 		win.add(new JScrollPane(tableAllComps));
@@ -57,27 +58,31 @@ public class compCheck implements ActionListener {
 		if (submitBtn == (JButton) e.getSource()) {
 			boolean flag = true;
 			int complaintNo = 0;
-			String sol = taSoln.getText();
+			String solution = SolutionText.getText();
+
 			try {
-				complaintNo = Integer.parseInt(tfCompNum.getText());
+				complaintNo = Integer.parseInt(complaintNoText.getText());
 			} catch (Exception exc) {
 				flag = false;
 				JOptionPane.showMessageDialog(null, "Invalid Complaint No");
+				exc.printStackTrace();
 			}
+
 			if (flag) {
 				if (!controller.findComplaint(complaintNo)) {
 					JOptionPane.showMessageDialog(null, "No Complaint exist for given Complain No.");
-				} else if (sol.isEmpty()) {
+				} else if (solution.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Solution cant be empty");
-				} else // Everything right
-				{
+				} else {
+
+					// Edge Cases Passed
 					try {
-						controller.addSolution(complaintNo, sol);
+						controller.addSolution(complaintNo, solution);
 						JOptionPane.showMessageDialog(null, "Successfully Added");
 					} catch (Exception e1) {
 						int opt = JOptionPane.showConfirmDialog(null, "Solution Already Exists. Overwrite?");
 						if (opt == JOptionPane.YES_OPTION) {
-							controller.updateSolution(complaintNo, sol);
+							controller.updateSolution(complaintNo, solution);
 							JOptionPane.showMessageDialog(null, "Successfully Overwrited");
 						}
 					}

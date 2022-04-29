@@ -23,11 +23,12 @@ public class compRegister implements ActionListener {
 	private int complaintNo;
 	private Controller controller;
 
-	public compRegister(compFile cfile) {
+	public compRegister(Controller controller) {
 		win = new JDialog();
-		this.cfile = cfile;
-		complaintNo = cfile.totalComps + 1;
-		controller = new Controller();
+		// this.cfile = cfile;
+		// controller = new Controller();
+		this.controller = controller;
+		complaintNo = controller.getCurrentComplaint();
 
 		win.setModalityType(ModalityType.APPLICATION_MODAL);
 		win.setTitle("Register Complaint");
@@ -70,8 +71,8 @@ public class compRegister implements ActionListener {
 		if (bPressed.equals(submitBtn)) {
 			Complaint newComp = new Complaint(dept.getSelectedItem(), complaintNo, complaint.getText(), "");
 			
-			// controller.acceptRegister(newComp);
-			cfile.addComp(newComp);
+			controller.acceptRegister(newComp);
+			// cfile.addComp(newComp);
 			JOptionPane.showMessageDialog(null, "Compaint has been Registered.\nYour Complaint No. is " + complaintNo);
 			win.dispose();
 		} else if (bPressed.equals(cancelBtn)) {

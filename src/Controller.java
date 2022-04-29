@@ -8,6 +8,8 @@ import javax.swing.JTable;
 public class Controller{
 	private compFile cFile;
 	private final String password = "root";
+	private Controller controller;
+
     View launcher;
 
 	public Controller() {
@@ -16,12 +18,18 @@ public class Controller{
 	}
 
 	public void boot(){
-		launcher = new View(cFile, password);
+		controller = new Controller();
+		launcher = new View(cFile, password, controller);
 	}
 
 	public void acceptRegister(Complaint newComplaint){
 		cFile.addComp(newComplaint);
+		cFile.updateTotalComps();
 		// JOptionPane.showMessageDialog(null, newComplaint);
+	}
+
+	public int getCurrentComplaint(){
+		return cFile.totalComps + 1;
 	}
 
 	public JTable returnData(){
@@ -45,7 +53,7 @@ public class Controller{
 	}
 
 	public String giveSolution(int complaintNo){
-		System.out.println(complaintNo);
+		// System.out.println(complaintNo);
 		return cFile.getSoln(complaintNo);
 	}
 
