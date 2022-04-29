@@ -22,11 +22,9 @@ public class View implements ActionListener, WindowListener{
     private final String password;
 
     public View(compFile cFile, String password){
-		// this.win = win;
 		this.cFile = cFile;
 		this.password = password;
 		win = new JFrame();
-		// this.cFile = cFile;
 		
 		win.setTitle("Complaint Box");
 		win.setSize(500, 600);
@@ -57,7 +55,7 @@ public class View implements ActionListener, WindowListener{
 		} else if (menuBtns[3] == e.getSource()) {
 			String pwdEntered = JOptionPane.showInputDialog(win, "Enter Password : ");
 			if (pwdEntered == null) {
-				// do nothing
+				// dolce far niente
 			} else if (pwdEntered.equals(password)) {
 				compCheck();
 			} else {
